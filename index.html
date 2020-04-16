@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CubeCritters2</title>
+		<style>
+			canvas{
+				border: 1px dashed black;
+			}
+		</style>
+	</head>
+
+
+	<body>
+		<!-- SHADER SOURCE -->
+		<script type="shader" id="vsSource">
+			attribute vec2 a_Position;
+			void main(){
+				gl_Position = vec4(a_Position.x/150.0-1.0,-a_Position.y/150.0+1.0,0,1);
+				gl_PointSize = 10.0;
+			}
+		</script>
+		
+		<script type="shader" id="fsSource">
+			precision mediump float;
+			void main(){
+				gl_FragColor = vec4(1,1,0,1);
+			}
+		</script>
+		<!--  -->
+		<script src="math.js"></script>
+		<!-- render -->
+		<script src="webgl.js"></script>
+		<!-- classes -->
+		<script src="NeuralNetwork.js"></script>
+		<script src="Quad.js"></script>
+		<script src="Critter.js"></script>
+		<!-- main -->
+		<script src="main.js"></script>
+	</body>
+</html>
