@@ -1,7 +1,25 @@
 console.log('Quad.js loaded')
 
-const maxLayers = 4
-const maxObjects = 2
+/* 		maxLayers,	maxObjects
+1000		4					2
+2000		5					18
+3000		5					28
+canvas.width = 300*3
+canvas.height = 300*3
+*/
+
+/* 
+
+
+3000		5					28		=>30fps 
+canvas.width = 300*5
+canvas.height = 300*5
+
+*/
+
+
+const maxLayers = 	5		//5	//4
+const maxObjects = 28	//18	//2
 
 class Quad{
 	constructor(x,y,w,h,layer){
