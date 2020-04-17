@@ -13,7 +13,7 @@ class Critter{
 		}
 	}
 	update(){
-		grid.rangeQueryInit(10,2,this)
+		grid.rangeQueryInit(100,2,this)
 		this.nn.feedForward([1,2])
 		this.dir = Math.random()*Math.PI*2
 		this.x += this.speed * Math.cos(this.dir)

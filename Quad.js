@@ -24,6 +24,9 @@ class Quad{
 		if(this.layer === 1){	// root
 			this.outsideObjects = []
 		}
+
+		//draw
+		rect(this.x,this.y,this.x+this.w,this.y+this.h)
 	}
 	addInit(obj){
 		if(obj.x>=this.x && obj.x<this.x+this.w && obj.y >= this.y && obj.y < this.y + this.h){

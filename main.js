@@ -20,7 +20,7 @@ let critterList = []
 setup()
 function setup(){
 	for(let i=0;i<1000;i++){// 35000, 3000
-		critterList[i] = new Critter(hWidth,hHeight,0,1)
+		critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 	}
 
 	loop()

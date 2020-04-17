@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 300
-canvas.height = 300
+canvas.width = 300*3
+canvas.height = 300*3
 document.body.append(canvas)
 
 // gl
@@ -58,7 +58,7 @@ gl.vertexAttribPointer(
 gl.enableVertexAttribArray(attribLocations.a_Position)
 
 // uniform
-
+gl.uniform2f(uniformLocations.u_ResModi,2/canvas.width,2/canvas.height)
 
 // data
 // const data = [
@@ -72,7 +72,25 @@ gl.enableVertexAttribArray(attribLocations.a_Position)
 
 // FUNCTIONS
 // function line
+function rect(x1,y1,x2,y2){
+	line(x1,y1,x2,y1)// top
+	line(x2,y1,x2,y2)// right
+	line(x2,y2,x1,y2)// bottom
+	line(x1,y2,x1,y1)// left
+}
 
+
+function line(x1,y1,x2,y2){
+	// DOES NOT WORK WELL FOR SLANTED LINES (especially 45 degree ones)
+	data.push(
+		x1,y1,
+		x1+2,y1+2,
+		x2,y2,
+		x2,y2,
+		x1+2,y1+2,
+		x2+2,y2+2,
+	)
+}
 
 const thick = 2
 function angline(x1,y1,x2,y2){

@@ -17,8 +17,9 @@
 		<!-- SHADER SOURCE -->
 		<script type="shader" id="vsSource">
 			attribute vec2 a_Position;
+			uniform vec2 u_ResModi;
 			void main(){
-				gl_Position = vec4(a_Position.x/150.0-1.0,-a_Position.y/150.0+1.0,0,1);
+				gl_Position = vec4(a_Position.x*u_ResModi[0]-1.0,-a_Position.y*u_ResModi[1]+1.0,0,1);
 				gl_PointSize = 10.0;
 			}
 		</script>
