@@ -71,6 +71,9 @@ gl.enableVertexAttribArray(attribLocations.a_Position)
 // render()
 
 // FUNCTIONS
+// function line
+
+
 const thick = 2
 function angline(x1,y1,x2,y2){
 	const dir = Math.atan2(y2-y1,x2-x1)

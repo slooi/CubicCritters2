@@ -1,8 +1,8 @@
 console.log('main.js loaded')
 
 // System variables
-// let fps = 60
-// let oldDate = -new Date()
+let fps = 30
+let oldDate = -new Date()
 let fWidth = canvas.width
 let fHeight = canvas.height
 let hWidth = canvas.width/2
@@ -19,7 +19,7 @@ let critterList = []
 
 setup()
 function setup(){
-	for(let i=0;i<3000;i++){
+	for(let i=0;i<1000;i++){// 35000, 3000
 		critterList[i] = new Critter(hWidth,hHeight,0,1)
 	}
 
@@ -28,25 +28,29 @@ function setup(){
 
 
 function loop(){
-	data = []
-	grid = new Quad(0,0,fWidth,fHeight,1)
-	// data.length = 0
+	// if(new Date()-oldDate>1000/fps){
+		data = []
+		grid = new Quad(0,0,fWidth,fHeight,1)
+		// data.length = 0
+	
+		// spatial partitioning
+		for(let i=critterList.length-1;i>-1;i--){
+			grid.addInit(critterList[i])
+		}
+	
+		// update
+		for(let i=critterList.length-1;i>-1;i--){
+			const critter = critterList[i]
+			critter.update()
+			critter.render()
+		}
+	
+		// render
+		clearCanvas()
+		render()
 
-	// spatial partitioning
-	for(let i=critterList.length-1;i>-1;i--){
-		grid.add(critterList[i])
-	}
-
-	// update
-	for(let i=critterList.length-1;i>-1;i--){
-		const critter = critterList[i]
-		critter.update()
-		critter.render()
-	}
-
-	// render
-	clearCanvas()
-	render()
+	// 	oldDate = new Date()
+	// }
 
 	requestAnimationFrame(loop)
 }
