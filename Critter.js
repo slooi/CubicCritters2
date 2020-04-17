@@ -9,7 +9,7 @@ class Critter{
 		this.w = 10
 		if(nn === undefined){
 			this.nn = new NeuralNetwork()
-			this.nn.build([2,10,10,10,10,1])
+			this.nn.build([2,10,10,1])
 		}
 	}
 	update(){
