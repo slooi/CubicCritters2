@@ -15,11 +15,23 @@ canvas.height = 300*3
 canvas.width = 300*5
 canvas.height = 300*5
 
+
 */
 
 
-const maxLayers = 	5		//5	//4
-const maxObjects = 28	//18	//2
+/* 
+3000	6		28			=>		30-45fps
+canvas.width = 300	*4
+canvas.height = 300	*4
+*/
+/* 
+3000	5		35			28-35 fps
+canvas.width = 300	*3	
+canvas.height = 300	*3
+*/
+
+const maxLayers = 5//5	//5		//5	//4
+const maxObjects =6//18	//35	//18	//2
 
 class Quad{
 	constructor(x,y,w,h,layer){
@@ -104,6 +116,9 @@ class Quad{
 		this.foundNeighbours = []	// inits & resets
 		this.searchedNodes = []		// inits & resets
 		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours,this.searchedNodes)
+
+		//
+		// addFoundNeighbours
 
 		// search outside
 		this.addFoundNeighbours(this.foundNeighbours,this.outsideObjects,queryObj,num)
@@ -194,3 +209,13 @@ class Quad{
 
 // 1) entities inside quad
 // 2) entities outside quad
+
+
+/* 
+How to speed up performance:
+1) remove object check
+2) use typed arrays and indices?
+3) use square collisions					DOESN'T WORK
+4) replace "value>this.dis2(arr[mid].x,arr[mid].y,obj.x,obj.y)" with something else => stores distances in an array or in an object  
+
+*/
