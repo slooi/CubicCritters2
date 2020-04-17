@@ -11,7 +11,7 @@ canvas.height = 300
 document.body.append(canvas)
 
 // gl
-let gl = canvas.getContext('webgl')
+let gl = canvas.getContext('webgl',{antialias:false})
 if(!gl){
 	gl = canvas.getContext('experimental-webgl')
 }
@@ -76,14 +76,14 @@ function angline(x1,y1,x2,y2){
 	const dir = Math.atan2(y2-y1,x2-x1)
 	const s = Math.sin(dir)
 	const c = Math.cos(dir)
-	data.push(
-		x1,y1,
-		x1+thick*s,y1+thick*c,
-		x2,y2,
-		x2,y2,
-		x1+thick*s,y1+thick*c,
-		x2+thick*s,y2+thick*c
-	)
+	// data.push(
+	// 	x1,y1,
+	// 	x1+thick*s,y1+thick*c,
+	// 	x2,y2,
+	// 	x2,y2,
+	// 	x1+thick*s,y1+thick*c,
+	// 	x2+thick*s,y2+thick*c
+	// )
 }
 
 function clearCanvas(){

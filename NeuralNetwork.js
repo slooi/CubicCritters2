@@ -31,4 +31,5 @@ NeuralNetwork.prototype.feedForward = function(inputs){
 		currentVal = mMulti(this.weights[i],currentVal)
 		mAddSig(currentVal,this.biases[i])
 	}
+	return currentVal
 }

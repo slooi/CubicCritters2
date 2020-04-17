@@ -70,6 +70,13 @@ function mMulti(m1,v){
 /* 
 MODIFIES
 */
+
+// function arrToVec(arr){
+// 	arrToVecTest(arr)
+// 	for(let i=arr.length-1;i>-1;i--){
+// 		arr[i] = [arr[i]]	
+// 	}
+// }
 function arrToVec(arr){
 	arrToVecTest(arr)
 	for(let i=0;i<arr.length;i++){
