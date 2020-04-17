@@ -67,9 +67,31 @@ function mMulti(m1,v){
 	return newM
 }
 
+/* 
+MODIFIES
+*/
+function arrToVec(arr){
+	arrToVecTest(arr)
+	for(let i=0;i<arr.length;i++){
+		arr[i] = [arr[i]]	
+	}
+}
+
 //#############
 // TESTS
 //#############
+
+
+/* 
+arr.length < 1
+arr[0].length !== undefined
+
+*/
+function arrToVecTest(arr){
+	if(arr[0].length !== undefined){
+		throw new Error('ERROR: arr[0].length !== undefined')
+	}
+}
 
 
 /* 
