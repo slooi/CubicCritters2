@@ -35,6 +35,8 @@ class Player{
 		this.yVel*=0.64
 		this.x+=this.xVel
 		this.y+=this.yVel
+
+		this.render()
 	}
 	render(){
 		data.push(
