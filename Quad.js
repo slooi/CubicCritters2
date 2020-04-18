@@ -89,13 +89,16 @@ class Quad{
 			return false
 		}
 	}
-	push(obj){
+	push(obj){		
 		this.objects.push(obj)
-		if(this.objects.length > maxObjects && this.layer<maxLayers ){
+		if(this.objects.length > maxObjects && this.layer<maxLayers){
 			this.tl = new Quad(this.x,					this.y,							this.w2,this.h2,this.layer+1)
 			this.tr = new Quad(this.x+this.w2,	this.y,							this.w2,this.h2,this.layer+1)
 			this.bl = new Quad(this.x,					this.y+this.h2,			this.w2,this.h2,this.layer+1)
 			this.br = new Quad(this.x+this.w2,	this.y+this.h2,			this.w2,this.h2,this.layer+1)
+			for(let i=0;i<this.objects.length;i++){
+				this.addToChildren(this.objects[i])
+			}
 		}
 	}
 	addToChildren(obj){
@@ -175,15 +178,15 @@ class Quad{
 			if(obj !== queryObj){
 				// not same object
 				const dis2 = this.dis2(queryObj.x,queryObj.y,obj.x,obj.y)
-				idx = this.getAddIndex(foundNeighbours,dis2,obj)
+				idx = this.getAddIndex(foundNeighbours,dis2,queryObj)
 				if(idx<num){
 					foundNeighbours.splice(idx,0,obj)
 				}
 			}
 		}
-		if(idx>=num){
-			foundNeighbours.length = num
-		}
+		// if(foundNeighbours.length>num){
+		// 	foundNeighbours.length = num
+		// }
 		
 	}
 	
@@ -191,13 +194,13 @@ class Quad{
 		return Math.pow(tx-ox,2)+Math.pow(ty-oy,2)
 	}
 
-	getAddIndex(arr,value,obj){
+	getAddIndex(arr,value,queryObj){
 		let top = arr.length
 		let low = 0
 		let mid
 		while(low!==top){
 			mid = (top+low)>>>1
-			if(value>this.dis2(arr[mid].x,arr[mid].y,obj.x,obj.y)){
+			if(value>this.dis2(arr[mid].x,arr[mid].y,queryObj.x,queryObj.y)){
 				low = mid + 1
 			}else{
 				top = mid

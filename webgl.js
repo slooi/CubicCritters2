@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 300	*5
-canvas.height = 300	*5
+canvas.width = 300	*1
+canvas.height = 300	*1
 document.body.append(canvas)
 
 // gl
@@ -92,19 +92,53 @@ function line(x1,y1,x2,y2){
 	)
 }
 
-const thick = 2
+const thick = 1
 function angline(x1,y1,x2,y2){
 	const dir = Math.atan2(y2-y1,x2-x1)
 	const s = Math.sin(dir)
 	const c = Math.cos(dir)
-	// data.push(
-	// 	x1,y1,
-	// 	x1+thick*s,y1+thick*c,
-	// 	x2,y2,
-	// 	x2,y2,
-	// 	x1+thick*s,y1+thick*c,
-	// 	x2+thick*s,y2+thick*c
-	// )
+	data.push(
+		x1,y1,
+		x1-thick*s,y1+thick*c,
+		x2,y2,
+		x2,y2,
+		x1-thick*s,y1+thick*c,
+		x2-thick*s,y2+thick*c
+	)
+}
+
+const mag = 25
+function magAngline(x1,y1,x2,y2){
+	const dir = Math.atan2(y2-y1,x2-x1)
+	const s = Math.sin(dir)
+	const c = Math.cos(dir)
+	x2 = x1+c*mag
+	y2 = y1+s*mag
+	data.push(
+		x1,y1,
+		x1-thick*s,y1+thick*c,
+		x2,y2,
+		x2,y2,
+		x1-thick*s,y1+thick*c,
+		x2-thick*s,y2+thick*c
+	)
+}
+
+const mag2 = 15
+function magAngline2(x1,y1,x2,y2){
+	const dir = Math.atan2(y2-y1,x2-x1)
+	const s = Math.sin(dir)
+	const c = Math.cos(dir)
+	x2 = x2-c*mag2
+	y2 = y2-s*mag2
+	data.push(
+		x1,y1,
+		x1-thick*s,y1+thick*c,
+		x2,y2,
+		x2,y2,
+		x1-thick*s,y1+thick*c,
+		x2-thick*s,y2+thick*c
+	)
 }
 
 function clearCanvas(){

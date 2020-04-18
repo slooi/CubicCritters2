@@ -19,7 +19,7 @@ let critterList = []
 
 setup()
 function setup(){
-	for(let i=0;i<500;i++){// 35000, 3000
+	for(let i=0;i<10;i++){// 35000, 3000
 		critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 	}
 
@@ -28,7 +28,7 @@ function setup(){
 
 
 function loop(){
-	// if(new Date()-oldDate>1000/fps){
+	if(new Date()-oldDate>1000/fps){
 		data = []
 		grid = new Quad(0,0,fWidth,fHeight,1)
 		// data.length = 0
@@ -49,8 +49,8 @@ function loop(){
 		clearCanvas()
 		render()
 
-	// 	oldDate = new Date()
-	// }
+		oldDate = new Date()
+	}
 
 	requestAnimationFrame(loop)
 }

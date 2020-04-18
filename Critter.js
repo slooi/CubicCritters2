@@ -13,7 +13,25 @@ class Critter{
 		}
 	}
 	update(){
-		grid.rangeQueryInit(100,2,this)
+		let neighbours = grid.rangeQueryInit(0,2,this)
+		// console.log(this,neighbours)
+		// if(neighbours[0])
+		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
+		if(neighbours[0])
+		angline(this.x,this.y,neighbours[0].x,neighbours[0].y)
+		// console.log(neighbours.length)
+		// neighbours.sort((a,b)=>{
+		// 	if((a.x-this.x)**2+(a.y-this.y)**2 < ((b.x-this.x)**2 + (b.y-this.y)**2)){
+		// 		return -1
+		// 	}else{
+		// 		return 1
+		// 	}
+		// })
+		// if(neighbours[0])
+		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
+		// console.log()
+		// for(let i=0;i<neighbours.length;i++){
+		// }
 		this.nn.feedForward([1,2])
 		this.dir = Math.random()*Math.PI*2
 		this.x += this.speed * Math.cos(this.dir)
@@ -21,12 +39,12 @@ class Critter{
 	}
 	render(){
 		data.push(
-			this.x, 					this.y,
-			this.x, 					this.y+this.w,
-			this.x+this.w, 		this.y,
-			this.x, 					this.y+this.w,
-			this.x+this.w, 		this.y+this.w,
-			this.x+this.w, 		this.y
+			this.x-this.w/2, 					this.y-this.w/2,
+			this.x-this.w/2, 					this.y+this.w/2,
+			this.x+this.w/2, 					this.y-this.w/2,
+			this.x-this.w/2, 					this.y+this.w/2,
+			this.x+this.w/2, 					this.y+this.w/2,
+			this.x+this.w/2, 					this.y-this.w/2,
 			)
 	}
 }
