@@ -52,6 +52,7 @@ class Quad{
 
 		if(this.layer === 1){	// root
 			this.foundNeighbours = []
+			this.foundNeighboursFood = []
 			this.outsideObjects = []
 		}
 
@@ -119,56 +120,74 @@ class Quad{
 
 		//what about points OUTSIDE of quad? !@#!@#!@#
 		this.foundNeighbours.length = 0	// inits & resets
+		this.foundNeighboursFood.length = 0
 		// this.foundNeighbours = []
 
 
 		// range query
-		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours)
+		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours,this.foundNeighboursFood)
 
 		// search outside
-		this.addFoundNeighbours(this.foundNeighbours,this.outsideObjects,queryObj,num)
+		this.addFoundNeighbours(this.foundNeighbours,this.foundNeighboursFood,this.outsideObjects,queryObj,num)
 
 		// if not found all 'num' objects ???
 		// increase search range???
 
 
-		return this.foundNeighbours
+
+		// COLLECT THE RESULT MANUALLY
+		// return this.foundNeighbours //
 	}
 
-	rangeQuery(range,num,queryObj,foundNeighbours){
+	rangeQuery(range,num,queryObj,foundNeighbours,foundNeighboursFood){
 
 		if(this.dis2(queryObj.x,queryObj.y,this.midX,this.midY)<(Math.pow(this.w2*1.42,2)+range)){
 			// if point in "range"
 			if(this.tl === undefined){
 				// bottom most node
-				this.addFoundNeighbours(foundNeighbours,this.objects,queryObj,num)
+				this.addFoundNeighbours(foundNeighbours,foundNeighboursFood,this.objects,queryObj,num)
 
 			}else{
 				// not bottom node
-				this.tl.rangeQuery(range,num,queryObj,foundNeighbours)
-				this.tr.rangeQuery(range,num,queryObj,foundNeighbours)
-				this.bl.rangeQuery(range,num,queryObj,foundNeighbours)
-				this.br.rangeQuery(range,num,queryObj,foundNeighbours)
+				this.tl.rangeQuery(range,num,queryObj,foundNeighbours,foundNeighboursFood)
+				this.tr.rangeQuery(range,num,queryObj,foundNeighbours,foundNeighboursFood)
+				this.bl.rangeQuery(range,num,queryObj,foundNeighbours,foundNeighboursFood)
+				this.br.rangeQuery(range,num,queryObj,foundNeighbours,foundNeighboursFood)
 			}
 		}
 		
 		// if(queryObj !== object)
 	}
 
-	addFoundNeighbours(foundNeighbours,nodeObjects,queryObj,num){
+	addFoundNeighbours(foundNeighbours,foundNeighboursFood,nodeObjects,queryObj,num){
 		let idx
 		for(let i=0;i<nodeObjects.length;i++){
 			const obj = nodeObjects[i]
 			
 			if(obj !== queryObj){
-				idx = this.getAddIndex(foundNeighbours,this.dis2(queryObj.x,queryObj.y,obj.x,obj.y),queryObj)
-				if(idx<num){
-					foundNeighbours.splice(idx,0,obj)
+				// not same object
+				if(obj.speed === undefined){
+					// food (as has no speed)
+					
+					idx = this.getAddIndex(foundNeighboursFood,this.dis2(queryObj.x,queryObj.y,obj.x,obj.y),queryObj)
+					if(idx<num){
+						foundNeighboursFood.splice(idx,0,obj)
+					}
+				}else{
+					// critter (as has speed)
+					
+					idx = this.getAddIndex(foundNeighbours,this.dis2(queryObj.x,queryObj.y,obj.x,obj.y),queryObj)
+					if(idx<num){
+						foundNeighbours.splice(idx,0,obj)
+					}
 				}
 			}
 		}
 		if(foundNeighbours.length>num){
 			foundNeighbours.length = num
+		}
+		if(foundNeighboursFood.length>num){
+			foundNeighboursFood.length = num
 		}
 	}
 	
