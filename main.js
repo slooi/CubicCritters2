@@ -23,15 +23,32 @@ let camera = new Camera(0,0,0.5,fWidth,fHeight)
 
 
 
+function screenSetting(type){
+	if(type === 0){
+		// default
+		for(let i=0;i<500;i++){// 35000, 3000
+			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,1)
+		}
+		for(let i=0;i<100;i++){
+			foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight)
+		}
+	}else{
+		// debugging
+		for(let i=0;i<10;i++){// 35000, 3000
+			critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
+		}
+		for(let i=0;i<100;i++){
+			foodList[i] = new Food(fWidth*Math.random(),fHeight*Math.random())
+		}
+	}
+
+}
+
+
 setup()
 function setup(){
-
-	for(let i=0;i<500;i++){// 35000, 3000
-		critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,1)
-	}
-	for(let i=0;i<100;i++){
-		foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight)
-	}
+	screenSetting(0)
+	
 	critterList.push(player)
 
 	loop()
@@ -41,7 +58,7 @@ function setup(){
 function loop(){
 	// if(new Date()-oldDate>1000/fps){
 		data = []
-		grid = new Quad(0-fWidth*3,0-fHeight*3	,fWidth*7,fHeight*7,1)
+		grid = new Quad(0-fWidth*3,0-fHeight*3,fWidth*7,fHeight*7,1)
 		// data.length = 0
 	
 		// SPATIAL PARTITIONING
