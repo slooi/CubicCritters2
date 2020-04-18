@@ -15,8 +15,8 @@ const inputs = inputHandler()
 
 // Game variables
 let critterList = []
-let player = new Player(inputs,30,30,10)
-let camera = new Camera(0,0,0.5)
+let player = new Player(inputs,0,0,10)
+let camera = new Camera(0,0,0.5,fWidth,fHeight)
 
 
 
@@ -50,7 +50,7 @@ function loop(){
 			critter.render()
 		}
 
-		camera.update(player.x,player.y)
+		camera.update(-player.x,player.y)
 		console.log(camera.x)
 
 		updateOffset(camera.x,camera.y)
