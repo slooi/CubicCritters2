@@ -15,11 +15,16 @@ class Critter{
 		}
 
 		this.inputs = []
+		this.deleted = false
 	}
 	update(i){
 		this.hp--
+		if(this.deleted===true){
+			throw new Error('ERROR this shouldnt happen!')
+		}
 		if(this.hp<1){
 			deleteList.push(i)		// Because we delete it LATER, multiple critters could eat this !@#!@#!@#
+			this.deleted = true
 		}else{
 			this.inputs = []
 			const numNeighbours = 4

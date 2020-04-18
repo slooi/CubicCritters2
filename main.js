@@ -82,7 +82,7 @@ function loop(){
 
 		// DELETE
 		if(deleteList.length > 0){
-			//!@#!@#!@#!@#!@# NEED TO ORDER THIS LIKE THE FOOD !#!@#!@#!@#!@#!@#!@#!@#
+			//!@#!@#!@#!@#!@# NEED TO ORDER THIS LIKE THE FOOD !#!@#!@#!@#!@#!@#!@#!@#!#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#
 			for(let i=deleteList.length-1;i>-1;i--){
 				critterList.splice(deleteList[i],1)
 			}
@@ -94,8 +94,6 @@ function loop(){
 				foodList.splice(deleteListFood[i],1)
 			}
 			deleteListFood.length=0
-
-			//!#@!@#!@#!@#!@# NEED TO UPDATE THE FOOD this.index VALUE
 		}
 
 		// RENDER
