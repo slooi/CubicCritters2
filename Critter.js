@@ -8,14 +8,19 @@ class Critter{
 		this.dir = dir
 		this.speed = speed
 		this.w = 16
+		this.hp = 500+~~(Math.random()*1000)
 		if(nn === undefined){
 			this.nn = new NeuralNetwork()
-			this.nn.build([8,10,10,1])
+			this.nn.build([16,10,10,1])
 		}
 
 		this.inputs = []
 	}
-	update(){
+	update(i){
+		this.hp--
+		if(this.hp<1){
+			deleteList.push(i)
+		}
 		this.inputs = []
 		const numNeighbours = 4
 		const turnSpeed = Math.PI*0.01
@@ -26,23 +31,27 @@ class Critter{
 
 		// !@#!@#!@# neighbour.length are not the same!
 		neighbours.forEach(neighbour=>{magAngline2(this.x,this.y,neighbour.x,neighbour.y)})
-		neighboursFood.forEach(food=>{angline(this.x,this.y,food.x,food.y)})
+		// neighboursFood.forEach(food=>{angline(this.x,this.y,food.x,food.y)})
 		
 		// PREPROCESSING
 		// REM: Handle if not enough neighbours
 		// const inputs = new Array(numNeighbours).fill(1)	//!@#!@#!@# just random length TIED
-		for(let i=0;i<numNeighbours;i++){	// .length NOT numNeighbours, as may not have enough neighbours
+		for(let i=0;i<numNeighbours*2;i+=2){	// .length NOT numNeighbours, as may not have enough neighbours
 			if(neighbours[i] === undefined){
 				this.inputs[i] = 1
+				this.inputs[i+1] = 1
 			}else{
 				this.inputs[i] = Math.sqrt(  Math.pow(neighbours[i].x-this.x,2)+Math.pow(neighbours[i].y-this.y,2)  )/(1+canvas.width*20)	//TIED!@#!@#!@#
+				this.inputs[i+1] = (Math.atan2(neighbours[i].y-this.y,neighbours[i].x-this.x)-this.dir)%Math.PI	//TIED!@#!@#!@#
 			}
 		}
-		for(let i=numNeighbours;i<numNeighbours*2;i++){	// .length NOT numNeighbours, as may not have enough neighbours
+		for(let i=numNeighbours*2;i<numNeighbours*4;i+=2){	// .length NOT numNeighbours, as may not have enough neighbours
 			if(neighboursFood[i] === undefined){
 				this.inputs[i] = 1
+				this.inputs[i+1] = 1
 			}else{
 				this.inputs[i] = Math.sqrt(  Math.pow(neighboursFood[i].x-this.x,2)+Math.pow(neighboursFood[i].y-this.y,2)  )/(1+canvas.width*20)	//TIED
+				this.inputs[i+1] = (Math.atan2(neighboursFood[i].y-this.y,neighboursFood[i].x-this.x)-this.dir)%Math.PI	//TIED!@#!@#!@#
 			}
 		}
 		// debugVar = [this,neighbours,this.inputs]
@@ -54,6 +63,8 @@ class Critter{
 		this.dir += 2*turnSpeed*output[0][0]-turnSpeed
 		this.x += this.speed * Math.cos(this.dir)
 		this.y += this.speed * Math.sin(this.dir)
+
+		this.render()
 	}
 	render(){
 		data.push(
