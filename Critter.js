@@ -35,22 +35,6 @@ class Critter{
 			}
 			
 		}
-		// console.log
-		
-		// console.log(neighbours.length)
-		// neighbours.sort((a,b)=>{
-		// 	if((a.x-this.x)**2+(a.y-this.y)**2 < ((b.x-this.x)**2 + (b.y-this.y)**2)){
-		// 		return -1
-		// 	}else{
-		// 		return 1
-		// 	}
-		// })
-		// if(neighbours[0])
-		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
-		// console.log()
-		// for(let i=0;i<neighbours.length;i++){
-		// }
-		// console.log(inputs)
 		const output = this.nn.feedForward(this.inputs)
 		this.dir += 2*turnSpeed*output[0][0]-turnSpeed
 		this.x += this.speed * Math.cos(this.dir)
@@ -64,6 +48,6 @@ class Critter{
 			this.x-this.w/2, 					this.y+this.w/2,
 			this.x+this.w/2, 					this.y+this.w/2,
 			this.x+this.w/2, 					this.y-this.w/2,
-			)
+		)
 	}
 }
