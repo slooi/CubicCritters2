@@ -21,7 +21,9 @@ if(!gl){
 
 // viewport and clearColor and clear
 gl.viewport(0,0,canvas.width,canvas.height)
-gl.clearColor(0,0,1,1)
+// gl.clearColor(112/255,176/255,192/255,1)
+// gl.clearColor(238.0/255.0,253.0/255.0,237.0/255.0,1)
+gl.clearColor(0.4,0.7,0.6,1)
 gl.clear(gl.COLOR_BUFFER_BIT)  
 
 // program
