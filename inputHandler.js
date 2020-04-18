@@ -25,7 +25,6 @@ function inputHandler(){
 				state.d = true
 				break;
 		}
-		console.log(state)
 	})
 	window.addEventListener('keyup',e=>{
 		const code = e.code
@@ -43,14 +42,7 @@ function inputHandler(){
 				state.d = false
 				break;
 		}
-		console.log(state)
 	})
-
-
-
-	function processKey(){
-
-	}
 
 
 

@@ -5,9 +5,17 @@
 		<meta charset="UTF-8">
 		<title>CubeCritters2</title>
 		<style>
+			*{
+				margin:0;
+			}
 			canvas{
-				border: 1px dashed black;
-				image-rendering:pixelated;
+				/* border: 1px dashed black; */
+				/* image-rendering:pixelated; */
+				transform: translateY(0);
+			}
+			html{
+				
+				overflow: hidden;
 			}
 		</style>
 	</head>
@@ -45,6 +53,7 @@
 		<script src="Critter.js"></script>
 		<script src="Camera.js"></script>
 		<script src="Player.js"></script>
+		<script src="Food.js"></script>
 		<!-- main -->
 		<script src="main.js"></script>
 	</body>

@@ -13,9 +13,12 @@ let data = []
 let grid
 const inputs = inputHandler()
 
+var debugVar
+
 // Game variables
 let critterList = []
-let player = new Player(inputs,hWidth,hHeight,10)
+let foodList = []
+let player = new Player(inputs,hWidth,hHeight)
 let camera = new Camera(0,0,0.5,fWidth,fHeight)
 
 
@@ -24,7 +27,10 @@ setup()
 function setup(){
 
 	for(let i=0;i<500;i++){// 35000, 3000
-		critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
+		critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,1)
+	}
+	for(let i=0;i<100;i++){
+		foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight)
 	}
 	critterList.push(player)
 
@@ -35,19 +41,30 @@ function setup(){
 function loop(){
 	// if(new Date()-oldDate>1000/fps){
 		data = []
-		grid = new Quad(0,0,fWidth,fHeight,1)
+		grid = new Quad(0-fWidth*3,0-fHeight*3	,fWidth*7,fHeight*7,1)
 		// data.length = 0
 	
-		// spatial partitioning
+		// SPATIAL PARTITIONING
+		// critter
 		for(let i=critterList.length-1;i>-1;i--){
 			grid.addInit(critterList[i])
 		}
+		// food
+		for(let i=foodList.length-1;i>-1;i--){
+			grid.addInit(foodList[i])
+		}
 	
-		// update
+		// UPDATE
+		// critter
 		for(let i=critterList.length-1;i>-1;i--){
 			const critter = critterList[i]
 			critter.update()
 			critter.render()
+		}
+		// food
+		for(let i=foodList.length-1;i>-1;i--){
+			const food = foodList[i]
+			food.render()
 		}
 
 		camera.update(-player.x,player.y)

@@ -6,12 +6,12 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 	300	*3//window.innerWidth	//300	*3
-canvas.height = 300	*3//window.innerHeight//300	*3
+canvas.width = 	window.innerWidth	//300	*3//window.innerWidth	//300	*3
+canvas.height = window.innerHeight//300	*3//window.innerHeight//300	*3
 document.body.append(canvas)
 
 // gl
-let gl = canvas.getContext('webgl',{antialias:false})
+let gl = canvas.getContext('webgl')//,{antialias:false}
 if(!gl){
 	gl = canvas.getContext('experimental-webgl')
 }
@@ -21,6 +21,7 @@ if(!gl){
 
 // viewport and clearColor and clear
 gl.viewport(0,0,canvas.width,canvas.height)
+// gl.viewport(0,0,100,100)
 // gl.clearColor(112/255,176/255,192/255,1)
 // gl.clearColor(238.0/255.0,253.0/255.0,237.0/255.0,1)
 gl.clearColor(0.4,0.7,0.6,1)

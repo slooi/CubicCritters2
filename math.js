@@ -97,6 +97,7 @@ arr[0].length !== undefined
 */
 function arrToVecTest(arr){
 	if(arr[0].length !== undefined){
+		console.log(arr)
 		throw new Error('ERROR: arr[0].length !== undefined')
 	}
 }

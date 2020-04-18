@@ -2,11 +2,11 @@
 console.log('Player.js loaded')
 
 class Player{
-	constructor(inputs,x,y,w){
+	constructor(inputs,x,y){
 		this.x = x
 		this.y = y
 		this.accel = 2
-		this.w = w
+		this.w = 16
 		this.inputs = inputs
 		this.xVel = 0
 		this.yVel = 0
