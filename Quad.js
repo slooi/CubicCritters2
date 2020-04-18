@@ -48,8 +48,6 @@ class Quad{
 		this.midX = this.x+this.w2
 		this.midY = this.y+this.h2
 
-		this.searchNum = 0
-		this.searched = false
 
 		if(this.layer === 1){	// root
 			this.outsideObjects = []
@@ -119,13 +117,10 @@ class Quad{
 
 		//what about points OUTSIDE of quad? !@#!@#!@#
 		this.foundNeighbours = []	// inits & resets
-		this.searchedNodes = []		// inits & resets
 
-
-		// search current node
 
 		// range query
-		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours,this.searchedNodes)
+		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours)
 
 		// search outside
 		this.addFoundNeighbours(this.foundNeighbours,this.outsideObjects,queryObj,num)
@@ -133,37 +128,24 @@ class Quad{
 		// if not found all 'num' objects ???
 		// increase search range???
 
-		// RESET all searchedNodes' to searched = false 
-		this.searchedNodes.forEach(node=>{
-			node.searched = false
-		})
-		// this.searchedNodes.length = 0		//resets
-		// this.foundNeighbours.length = 0	//resets
 
 		return this.foundNeighbours
 	}
 
-	rangeQuery(range,num,queryObj,foundNeighbours,searchedNodes){
+	rangeQuery(range,num,queryObj,foundNeighbours){
 
 		if(this.dis2(queryObj.x,queryObj.y,this.midX,this.midY)<(Math.pow(this.w2*1.42,2)+range)){
 			// if point in "range"
 			if(this.tl === undefined){
 				// bottom most node
-				if(this.searched === false){	// wasn't going here before
-					// not yet searched 
-
-					this.addFoundNeighbours(foundNeighbours,this.objects,queryObj,num)
-					this.searched = true		// this.searched
-					searchedNodes.push(this)
-					//!@#@!@# this.searched = true
-				}
+				this.addFoundNeighbours(foundNeighbours,this.objects,queryObj,num)
 
 			}else{
 				// not bottom node
-				this.tl.rangeQuery(range,num,queryObj,foundNeighbours,searchedNodes)
-				this.tr.rangeQuery(range,num,queryObj,foundNeighbours,searchedNodes)
-				this.bl.rangeQuery(range,num,queryObj,foundNeighbours,searchedNodes)
-				this.br.rangeQuery(range,num,queryObj,foundNeighbours,searchedNodes)
+				this.tl.rangeQuery(range,num,queryObj,foundNeighbours)
+				this.tr.rangeQuery(range,num,queryObj,foundNeighbours)
+				this.bl.rangeQuery(range,num,queryObj,foundNeighbours)
+				this.br.rangeQuery(range,num,queryObj,foundNeighbours)
 			}
 		}
 		
