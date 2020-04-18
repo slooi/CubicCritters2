@@ -13,12 +13,15 @@ class Critter{
 		}
 	}
 	update(){
-		let neighbours = grid.rangeQueryInit(150,10,this)
+		let neighbours = grid.rangeQueryInit(150,1,this)
 		// console.log(this,neighbours)
 		// if(neighbours[0])
 		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
-		if(neighbours[0])
-		angline(this.x,this.y,neighbours[0].x,neighbours[0].y)
+
+
+		// !@#!@#!@# neighbour.length are not the same!
+		neighbours.forEach(neighbour=>{magAngline2(this.x,this.y,neighbour.x,neighbour.y)})
+		
 		// console.log(neighbours.length)
 		// neighbours.sort((a,b)=>{
 		// 	if((a.x-this.x)**2+(a.y-this.y)**2 < ((b.x-this.x)**2 + (b.y-this.y)**2)){

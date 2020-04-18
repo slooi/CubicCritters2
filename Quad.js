@@ -71,6 +71,8 @@ class Quad{
 			return true
 		}else{
 			this.outsideObjects.push(obj)
+
+			obj.node = undefined
 		}
 	}
 
@@ -99,6 +101,8 @@ class Quad{
 			for(let i=0;i<this.objects.length;i++){
 				this.addToChildren(this.objects[i])
 			}
+		}else{
+			obj.node = this
 		}
 	}
 	addToChildren(obj){
@@ -118,10 +122,19 @@ class Quad{
 		//what about points OUTSIDE of quad? !@#!@#!@#
 		this.foundNeighbours = []	// inits & resets
 		this.searchedNodes = []		// inits & resets
-		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours,this.searchedNodes)
 
-		//
-		// addFoundNeighbours
+
+		// search current node
+		if(queryObj.node !== undefined){
+			this.addFoundNeighboursInit(this.foundNeighbours,queryObj.node.objects,queryObj,num)
+
+			// mark
+			queryObj.node.searched = true
+			this.searchedNodes.push(queryObj.node)
+		}
+
+		// range query
+		this.rangeQuery(Math.pow(range,2),num,queryObj,this.foundNeighbours,this.searchedNodes)
 
 		// search outside
 		this.addFoundNeighbours(this.foundNeighbours,this.outsideObjects,queryObj,num)
@@ -175,6 +188,21 @@ class Quad{
 		let idx
 		for(let i=0;i<nodeObjects.length;i++){
 			const obj = nodeObjects[i]
+			
+			const dis2 = this.dis2(queryObj.x,queryObj.y,obj.x,obj.y)
+			idx = this.getAddIndex(foundNeighbours,dis2,queryObj)
+			if(idx<num){
+				foundNeighbours.splice(idx,0,obj)
+			}
+		}
+		if(foundNeighbours.length>num){
+			foundNeighbours.length = num
+		}
+	}
+	addFoundNeighboursInit(foundNeighbours,nodeObjects,queryObj,num){
+		let idx
+		for(let i=0;i<nodeObjects.length;i++){
+			const obj = nodeObjects[i]
 			if(obj !== queryObj){
 				// not same object
 				const dis2 = this.dis2(queryObj.x,queryObj.y,obj.x,obj.y)
@@ -184,10 +212,9 @@ class Quad{
 				}
 			}
 		}
-		// if(foundNeighbours.length>num){
-		// 	foundNeighbours.length = num
-		// }
-		
+		if(foundNeighbours.length>num){
+			foundNeighbours.length = num
+		}
 	}
 	
 	dis2(ox,oy,tx,ty){
