@@ -101,6 +101,7 @@ class Quad{
 			for(let i=0;i<this.objects.length;i++){
 				this.addToChildren(this.objects[i])
 			}
+			this.objects.length = 0
 		}else{
 			obj.node = this
 		}
@@ -140,12 +141,7 @@ class Quad{
 		this.addFoundNeighbours(this.foundNeighbours,this.outsideObjects,queryObj,num)
 
 		// if not found all 'num' objects ???
-		// increase search range?
-		if(this.foundNeighbours.length<num){
-			// console.log(this.foundNeighbours)
-			// console.log('Couldnt find all neighbours')
-		}
-
+		// increase search range???
 
 		// RESET all searchedNodes' to searched = false 
 		this.searchedNodes.forEach(node=>{
