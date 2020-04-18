@@ -28,10 +28,10 @@ let camera = new Camera(0,0,0.5,fWidth,fHeight)
 function screenSetting(type=0){
 	if(type === 0){
 		// default
-		for(let i=0;i<400;i++){// 35000, 3000
+		for(let i=0;i<1000;i++){// 35000, 3000
 			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,2)
 		}
-		for(let i=0;i<100;i++){
+		for(let i=0;i<1000;i++){
 			foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,i)
 		}
 	}else{
@@ -90,7 +90,7 @@ function loop(){
 		}
 		if(deleteListFood.length > 0){
 			for(let i=deleteListFood.length-1;i>-1;i--){	// IMPORTANT TO DO BACKWARDS
-				console.log(deleteListFood[i])
+				// console.log(deleteListFood[i])
 				foodList.splice(deleteListFood[i],1)
 			}
 			deleteListFood.length=0

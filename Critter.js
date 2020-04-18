@@ -64,7 +64,7 @@ class Critter{
 			}
 			// debugVar = [this,neighbours,this.inputs]
 			if(this.inputs[1].length !==undefined){
-				console.log(':D')
+				// console.log(':D')
 			}
 			
 			const output = this.nn.feedForward(this.inputs)
@@ -90,8 +90,8 @@ class Critter{
 		for(let i=0;i<neighboursFood.length;i++){
 			const food = neighboursFood[i]
 			if(   (Math.pow(food.x-this.x,2)+Math.pow(food.y-this.y,2))   <Math.pow(this.w*0.6,2)){
-				console.log('Food Eaten')
 				neighboursFood[i].delete()
+				this.hp+=1000
 			}else{
 				// once list is sorted, we know that preceeding food are too far to reach
 				break
