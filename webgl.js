@@ -72,8 +72,11 @@ gl.uniform2f(uniformLocations.u_Offset,0,0)
 // render()
 
 // FUNCTIONS
-
+function updateResolution(w,h){
+	gl.uniform2f(uniformLocations.u_ResModi,2/w,2/h)
+}
 function updateOffset(x,y){
+	console.log(1)
 	gl.uniform2f(uniformLocations.u_Offset,x,y)
 }
 
