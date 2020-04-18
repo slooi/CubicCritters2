@@ -18,8 +18,9 @@
 		<script type="shader" id="vsSource">
 			attribute vec2 a_Position;
 			uniform vec2 u_ResModi;
+			uniform vec2 u_Offset;
 			void main(){
-				gl_Position = vec4(a_Position.x*u_ResModi[0]-1.0,-a_Position.y*u_ResModi[1]+1.0,0,1);
+				gl_Position = vec4((a_Position.x+u_Offset[0])*u_ResModi[0]-1.0,(-a_Position.y+u_Offset[1])*u_ResModi[1]+1.0,0,1);
 				gl_PointSize = 10.0;
 			}
 		</script>
@@ -40,6 +41,7 @@
 		<script src="NeuralNetwork.js"></script>
 		<script src="Quad.js"></script>
 		<script src="Critter.js"></script>
+		<script src="Camera.js"></script>
 		<script src="Player.js"></script>
 		<!-- main -->
 		<script src="main.js"></script>

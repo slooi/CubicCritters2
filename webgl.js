@@ -59,6 +59,7 @@ gl.enableVertexAttribArray(attribLocations.a_Position)
 
 // uniform
 gl.uniform2f(uniformLocations.u_ResModi,2/canvas.width,2/canvas.height)
+gl.uniform2f(uniformLocations.u_Offset,0,0)
 
 // data
 // const data = [
@@ -71,6 +72,12 @@ gl.uniform2f(uniformLocations.u_ResModi,2/canvas.width,2/canvas.height)
 // render()
 
 // FUNCTIONS
+
+function updateOffset(x,y){
+	gl.uniform2f(uniformLocations.u_Offset,x,y)
+}
+
+
 // function line
 function rect(x1,y1,x2,y2){
 	line(x1,y1,x2,y1)// top
