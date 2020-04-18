@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 300	*3
-canvas.height = 300	*3
+canvas.width = 	300	*3//window.innerWidth	//300	*3
+canvas.height = 300	*3//window.innerHeight//300	*3
 document.body.append(canvas)
 
 // gl
@@ -76,7 +76,6 @@ function updateResolution(w,h){
 	gl.uniform2f(uniformLocations.u_ResModi,2/w,2/h)
 }
 function updateOffset(x,y){
-	console.log(1)
 	gl.uniform2f(uniformLocations.u_Offset,x,y)
 }
 

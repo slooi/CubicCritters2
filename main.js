@@ -50,11 +50,11 @@ function loop(){
 			critter.render()
 		}
 
+		camera.update(-player.x,player.y)
 		
 		updateResolution(camera.w,camera.h)
-		if(camera.update(-player.x,player.y)){
-			updateOffset(camera.x,camera.y)
-		}
+		updateOffset(camera.x,camera.y)
+		
 
 	
 		// render
