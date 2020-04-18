@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 	600//window.innerWidth	//300	*3//window.innerWidth	//300	*3
-canvas.height = 600//window.innerHeight//300	*3//window.innerHeight//300	*3
+canvas.width = 	window.innerWidth//600//window.innerWidth	//300	*3//window.innerWidth	//300	*3
+canvas.height = window.innerHeight//600//window.innerHeight//300	*3//window.innerHeight//300	*3
 document.body.append(canvas)
 
 // gl

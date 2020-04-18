@@ -49,7 +49,7 @@ function screenSetting(type=0){
 
 setup()
 function setup(){
-	screenSetting(1)
+	screenSetting(0)
 	
 	critterList.push(player)
 
@@ -83,13 +83,13 @@ function loop(){
 		// DELETE
 		if(deleteList.length > 0){
 			//!@#!@#!@#!@#!@# NEED TO ORDER THIS LIKE THE FOOD !#!@#!@#!@#!@#!@#!@#!@#!#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#
-			for(let i=deleteList.length-1;i>-1;i--){
+			for(let i=deleteList.length-1;i>-1;i--){	// IMPORTANT TO DO BACKWARDS
 				critterList.splice(deleteList[i],1)
 			}
 			deleteList.length=0
 		}
 		if(deleteListFood.length > 0){
-			for(let i=deleteListFood.length-1;i>-1;i--){
+			for(let i=deleteListFood.length-1;i>-1;i--){	// IMPORTANT TO DO BACKWARDS
 				console.log(deleteListFood[i])
 				foodList.splice(deleteListFood[i],1)
 			}

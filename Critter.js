@@ -23,7 +23,9 @@ class Critter{
 			throw new Error('ERROR this shouldnt happen!')
 		}
 		if(this.hp<1){
-			deleteList.push(i)		// Because we delete it LATER, multiple critters could eat this !@#!@#!@#
+			const insertIdx = getAddIndex(deleteList,i)
+			deleteList.splice(insertIdx,0,i)		// Because we delete it LATER, multiple critters could eat this!@##!@#!@#
+			// deleteList.push(i)		// Because we delete it LATER, multiple critters could eat this !@#!@#!@#
 			this.deleted = true
 		}else{
 			this.inputs = []
