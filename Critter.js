@@ -10,20 +10,23 @@ class Critter{
 		this.w = 16
 		if(nn === undefined){
 			this.nn = new NeuralNetwork()
-			this.nn.build([2,10,10,1])
+			this.nn.build([8,10,10,1])
 		}
 
 		this.inputs = []
 	}
 	update(){
 		this.inputs = []
-		const numNeighbours = 2
+		const numNeighbours = 4
 		const turnSpeed = Math.PI*0.01
-		let neighbours = grid.rangeQueryInit(150,numNeighbours,this)
 
+		grid.rangeQueryInit(150,numNeighbours,this)
+		let neighbours = grid.foundNeighbours
+		let neighboursFood = grid.foundNeighboursFood
 
 		// !@#!@#!@# neighbour.length are not the same!
 		neighbours.forEach(neighbour=>{magAngline2(this.x,this.y,neighbour.x,neighbour.y)})
+		neighboursFood.forEach(food=>{angline(this.x,this.y,food.x,food.y)})
 		
 		// PREPROCESSING
 		// REM: Handle if not enough neighbours
@@ -32,9 +35,15 @@ class Critter{
 			if(neighbours[i] === undefined){
 				this.inputs[i] = 1
 			}else{
-				this.inputs[i] = Math.sqrt(  Math.pow(neighbours[i].x-this.x,2)+Math.pow(neighbours[i].y-this.y,2)  )/(1+canvas.width*2)	//TIED
+				this.inputs[i] = Math.sqrt(  Math.pow(neighbours[i].x-this.x,2)+Math.pow(neighbours[i].y-this.y,2)  )/(1+canvas.width*20)	//TIED!@#!@#!@#
 			}
-			
+		}
+		for(let i=numNeighbours;i<numNeighbours*2;i++){	// .length NOT numNeighbours, as may not have enough neighbours
+			if(neighboursFood[i] === undefined){
+				this.inputs[i] = 1
+			}else{
+				this.inputs[i] = Math.sqrt(  Math.pow(neighboursFood[i].x-this.x,2)+Math.pow(neighboursFood[i].y-this.y,2)  )/(1+canvas.width*20)	//TIED
+			}
 		}
 		// debugVar = [this,neighbours,this.inputs]
 		if(this.inputs[1].length !==undefined){
