@@ -18,23 +18,24 @@ var debugVar
 // Game variables
 let critterList = []
 let foodList = []
+let deleteList = []
 let player = new Player(inputs,hWidth,hHeight)
 let camera = new Camera(0,0,0.5,fWidth,fHeight)
 
 
 
-function screenSetting(type){
+function screenSetting(type=0){
 	if(type === 0){
 		// default
-		for(let i=0;i<500;i++){// 35000, 3000
-			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,1)
+		for(let i=0;i<400;i++){// 35000, 3000
+			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,2)
 		}
 		for(let i=0;i<100;i++){
 			foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight)
 		}
 	}else{
 		// debugging
-		for(let i=0;i<10;i++){// 35000, 3000
+		for(let i=0;i<100;i++){// 35000, 3000
 			critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 		}
 		for(let i=0;i<100;i++){
@@ -47,7 +48,7 @@ function screenSetting(type){
 
 setup()
 function setup(){
-	screenSetting(0)
+	screenSetting(1)
 	
 	critterList.push(player)
 
@@ -75,13 +76,21 @@ function loop(){
 		// critter
 		for(let i=critterList.length-1;i>-1;i--){
 			const critter = critterList[i]
-			critter.update()
-			critter.render()
+			critter.update(i)
+			// critter.render()
 		}
 		// food
 		for(let i=foodList.length-1;i>-1;i--){
 			const food = foodList[i]
 			food.render()
+		}
+
+		// DELETE
+		if(deleteList.length > 0){
+			for(let i=deleteList.length-1;i>-1;i--){
+				critterList.splice(critterList[deleteList[i]],1)
+			}
+			deleteList.length=0
 		}
 
 		camera.update(-player.x,player.y)
