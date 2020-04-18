@@ -1,3 +1,4 @@
+'use strict'
 console.log('NeuralNetwork.js loaded')
 
 class NeuralNetwork{

@@ -1,3 +1,5 @@
+'use strict'
+
 console.log('main.js loaded')
 
 // System variables
@@ -19,7 +21,7 @@ let critterList = []
 
 setup()
 function setup(){
-	for(let i=0;i<1000;i++){// 35000, 3000
+	for(let i=0;i<500;i++){// 35000, 3000
 		critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 	}
 

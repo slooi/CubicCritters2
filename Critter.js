@@ -1,3 +1,4 @@
+'use strict'
 console.log('Critter.js loaded')
 
 class Critter{
@@ -18,14 +19,9 @@ class Critter{
 		const numNeighbours = 2
 		const turnSpeed = Math.PI*0.01
 		let neighbours = grid.rangeQueryInit(150,numNeighbours,this)
-		// console.log(this,neighbours)
-		// if(neighbours[0])
-		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
 
 
 		// !@#!@#!@# neighbour.length are not the same!
-		// if(neighbours.length>1)
-		// console.log(neighbours.length)
 		neighbours.forEach(neighbour=>{magAngline2(this.x,this.y,neighbour.x,neighbour.y)})
 		
 		// PREPROCESSING

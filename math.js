@@ -1,3 +1,4 @@
+'use strict'
 console.log('math.js loaded')
 
 

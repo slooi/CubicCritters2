@@ -1,3 +1,4 @@
+'use strict'
 console.log('Quad.js loaded')
 
 /* 		maxLayers,	maxObjects
@@ -50,6 +51,7 @@ class Quad{
 
 
 		if(this.layer === 1){	// root
+			this.foundNeighbours = []
 			this.outsideObjects = []
 		}
 
@@ -116,7 +118,8 @@ class Quad{
 		// return LIST of 'num' obj
 
 		//what about points OUTSIDE of quad? !@#!@#!@#
-		this.foundNeighbours = []	// inits & resets
+		this.foundNeighbours.length = 0	// inits & resets
+		// this.foundNeighbours = []
 
 
 		// range query
