@@ -11,6 +11,7 @@ let hWidth = canvas.width/2
 let hHeight = canvas.height/2
 let data = []
 let grid
+const inputs = inputHandler()
 
 // Game variables
 let critterList = []
@@ -21,9 +22,11 @@ let critterList = []
 
 setup()
 function setup(){
+
 	for(let i=0;i<500;i++){// 35000, 3000
 		critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 	}
+	critterList.push(new Player(inputs,30,30,10))
 
 	loop()
 }
