@@ -30,8 +30,8 @@ canvas.width = 300	*3
 canvas.height = 300	*3
 */
 
-const maxLayers = 5//5	//5		//5	//4
-const maxObjects =6//18	//35	//18	//2
+const maxLayers = 6//5//5	//5		//5	//4
+const maxObjects =4	//6//18	//35	//18	//2
 
 class Quad{
 	constructor(x,y,w,h,layer){

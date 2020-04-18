@@ -13,7 +13,7 @@ class Critter{
 		}
 	}
 	update(){
-		let neighbours = grid.rangeQueryInit(0,2,this)
+		let neighbours = grid.rangeQueryInit(150,10,this)
 		// console.log(this,neighbours)
 		// if(neighbours[0])
 		// 	magAngline2(this.x,this.y,neighbours[0].x,neighbours[0].y)
