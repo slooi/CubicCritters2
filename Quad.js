@@ -174,7 +174,7 @@ class Quad{
 						foundNeighboursFood.splice(idx,0,obj)
 					}
 				}else{
-					// critter (as has speed)
+					// critter (as has speed)  && PLAYER
 					
 					idx = this.getAddIndex(foundNeighbours,this.dis2(queryObj.x,queryObj.y,obj.x,obj.y),queryObj)
 					if(idx<num){
