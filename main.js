@@ -23,6 +23,7 @@ let deleteListFood = []
 let player = new Player(inputs,hWidth,hHeight)
 let camera = new Camera(0,0,0.5,fWidth,fHeight)
 let maxPopulation = 500
+let maxFood = 2000
 
 
 
@@ -64,9 +65,9 @@ function loop(){
 
 
 		if(debugMode === 0){
-			// if(Math.random()<.1){
+			if(foodList.length < maxFood && Math.random()<.2){
 				foodList.push(new Food(fWidth*Math.random()*5-fWidth*2,fWidth*Math.random()*5-fWidth*2,foodList.length))
-			// }
+			}
 		}
 		
 		data.length = 0
