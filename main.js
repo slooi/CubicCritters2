@@ -13,7 +13,7 @@ let data = []
 let grid
 const inputs = inputHandler()
 
-var debugVar
+var debugMode = 1		// 0 - off, 1 - on
 
 // Game variables
 let critterList = []
@@ -22,13 +22,14 @@ let deleteList = []
 let deleteListFood = []
 let player = new Player(inputs,hWidth,hHeight)
 let camera = new Camera(0,0,0.5,fWidth,fHeight)
+let maxPopulation = 1
 
 
 
-function screenSetting(type=0){
-	if(type === 0){
+function screenSetting(){
+	if(debugMode === 0){
 		// default
-		for(let i=0;i<1000;i++){// 35000, 3000
+		for(let i=0;i<200;i++){// 35000, 3000
 			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,2)
 		}
 		for(let i=0;i<1000;i++){
@@ -36,7 +37,7 @@ function screenSetting(type=0){
 		}
 	}else{
 		// debugging
-		for(let i=0;i<40;i++){// 35000, 3000
+		for(let i=0;i<5;i++){// 35000, 3000
 			critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 		}
 		for(let i=0;i<100;i++){
@@ -49,7 +50,7 @@ function screenSetting(type=0){
 
 setup()
 function setup(){
-	screenSetting(0)
+	screenSetting()
 	
 	critterList.push(player)
 
@@ -59,7 +60,11 @@ function setup(){
 function loop(){
 	// if(new Date()-oldDate>1000/fps){
 		data = []
-		grid = new Quad(0-fWidth*3,0-fHeight*3,fWidth*7,fHeight*7,1)
+		if(debugMode === 0){
+			grid = new Quad(0-fWidth*3,0-fHeight*3,fWidth*7,fHeight*7,1)
+		}else{
+			grid = new Quad(0,0,fWidth,fHeight,1)
+		}
 		// data.length = 0
 	
 		// SPATIAL PARTITIONING

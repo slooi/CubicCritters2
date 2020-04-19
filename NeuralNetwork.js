@@ -34,3 +34,32 @@ NeuralNetwork.prototype.feedForward = function(inputs){
 	}
 	return currentVal
 }
+
+NeuralNetwork.prototype.createMutatedCopy = function(amp){
+	if(isNaN(amp)){
+		throw new Error('ERROR: isNaN(amp)')
+	}
+
+	const newMutatedNeuralNetwork = new NeuralNetwork()
+	
+	// COPY
+	// weights
+	const weights = new Array(this.weights.length)
+	for(let i=0;i<this.weights.length;i++){
+		weights[i] = mCopy(this.weights[i])
+		// MUTATE
+		mMutate(weights[i],amp)
+	}
+	// biases
+	const biases = new Array(this.biases.length)
+	for(let i=0;i<this.biases.length;i++){
+		biases[i] = mCopy(this.biases[i])
+		// MUTATE
+		mMutate(biases[i],amp)
+	}
+
+
+	// LOAD && return
+	newMutatedNeuralNetwork.load(weights,biases)
+	return newMutatedNeuralNetwork
+}

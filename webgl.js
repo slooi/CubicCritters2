@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 	window.innerWidth//600//window.innerWidth	//300	*3//window.innerWidth	//300	*3
-canvas.height = window.innerHeight//600//window.innerHeight//300	*3//window.innerHeight//300	*3
+canvas.width = 	400//window.innerWidth	//300	*3//window.innerWidth	//300	*3
+canvas.height = 400//window.innerHeight//300	*3//window.innerHeight//300	*3
 document.body.append(canvas)
 
 // gl
@@ -55,10 +55,20 @@ gl.vertexAttribPointer(
 	2,
 	gl.FLOAT,
 	0,
-	0,
-	0
+	5*Float32Array.BYTES_PER_ELEMENT,
+	0*Float32Array.BYTES_PER_ELEMENT
 )
 gl.enableVertexAttribArray(attribLocations.a_Position)
+// pointer
+gl.vertexAttribPointer(
+	attribLocations.a_Color,
+	3,
+	gl.FLOAT,
+	0,
+	5*Float32Array.BYTES_PER_ELEMENT,
+	2*Float32Array.BYTES_PER_ELEMENT
+)
+gl.enableVertexAttribArray(attribLocations.a_Color)
 
 // uniform
 gl.uniform2f(uniformLocations.u_ResModi,2/canvas.width,2/canvas.height)
@@ -75,6 +85,18 @@ gl.uniform2f(uniformLocations.u_Offset,0,0)
 // render()
 
 // FUNCTIONS
+function square(x,y,w){
+	data.push(
+		x-w/2, 					y-w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x-w/2, 					y+w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x+w/2, 					y-w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x-w/2, 					y+w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x+w/2, 					y+w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x+w/2, 					y-w/2,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+	)
+}
+
+
 function updateResolution(w,h){
 	gl.uniform2f(uniformLocations.u_ResModi,2/w,2/h)
 }
@@ -95,61 +117,78 @@ function rect(x1,y1,x2,y2){
 function line(x1,y1,x2,y2){
 	// DOES NOT WORK WELL FOR SLANTED LINES (especially 45 degree ones)
 	data.push(
-		x1,y1,
-		x1+2,y1+2,
-		x2,y2,
-		x2,y2,
-		x1+2,y1+2,
-		x2+2,y2+2,
+		x1,y1,		238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x1+2,y1+2,238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x2,y2,		238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x2,y2,		238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x1+2,y1+2,238.0/255.0,	253.0/255.0,	237.0/255.0,
+		x2+2,y2+2,238.0/255.0,	253.0/255.0,	237.0/255.0,
 	)
 }
 
 const thick = 1
-function angline(x1,y1,x2,y2){
+function angline(x1,y1,x2,y2,r=238.0/255.0,g=253.0/255.0,b=237.0/255.0){
 	const dir = Math.atan2(y2-y1,x2-x1)
 	const s = Math.sin(dir)
 	const c = Math.cos(dir)
 	data.push(
-		x1,y1,
-		x1-thick*s,y1+thick*c,
-		x2,y2,
-		x2,y2,
-		x1-thick*s,y1+thick*c,
-		x2-thick*s,y2+thick*c
+		x1,y1,								r,	g,	b,
+		x1-thick*s,y1+thick*c,r,	g,	b,
+		x2,y2,								r,	g,	b,
+		x2,y2,								r,	g,	b,
+		x1-thick*s,y1+thick*c,r,	g,	b,
+		x2-thick*s,y2+thick*c,r,	g,	b,
+	)
+}
+
+
+const magShort = 25
+function magAnglineShort(x1,y1,dir,r=238.0/255.0,g=253.0/255.0,b=237.0/255.0){
+	const c = Math.cos(dir)
+	const s = Math.sin(dir)
+	const x2 = x1+c*magShort
+	const y2 = y1+s*magShort
+	data.push(
+		x1,y1,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2-thick*s,y2+thick*c,	r,	g,	b,
 	)
 }
 
 const mag = 25
-function magAngline(x1,y1,x2,y2){
+function magAngline(x1,y1,x2,y2,r=238.0/255.0,g=253.0/255.0,b=237.0/255.0){
 	const dir = Math.atan2(y2-y1,x2-x1)
 	const s = Math.sin(dir)
 	const c = Math.cos(dir)
 	x2 = x1+c*mag
 	y2 = y1+s*mag
 	data.push(
-		x1,y1,
-		x1-thick*s,y1+thick*c,
-		x2,y2,
-		x2,y2,
-		x1-thick*s,y1+thick*c,
-		x2-thick*s,y2+thick*c
+		x1,y1,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2-thick*s,y2+thick*c,	r,	g,	b,
 	)
 }
 
 const mag2 = 15
-function magAngline2(x1,y1,x2,y2){
+function magAngline2(x1,y1,x2,y2,r=238.0/255.0,g=253.0/255.0,b=237.0/255.0){
 	const dir = Math.atan2(y2-y1,x2-x1)
 	const s = Math.sin(dir)
 	const c = Math.cos(dir)
 	x2 = x2-c*mag2
 	y2 = y2-s*mag2
 	data.push(
-		x1,y1,
-		x1-thick*s,y1+thick*c,
-		x2,y2,
-		x2,y2,
-		x1-thick*s,y1+thick*c,
-		x2-thick*s,y2+thick*c
+		x1,y1,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x2,y2,									r,	g,	b,
+		x1-thick*s,y1+thick*c,	r,	g,	b,
+		x2-thick*s,y2+thick*c,	r,	g,	b,
 	)
 }
 

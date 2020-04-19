@@ -12,12 +12,12 @@ class Food{
 	render(){
 		//^^
 		data.push(
-			this.x-this.w,this.y+this.w,
-			this.x,		this.y+this.w,
-			this.x-this.w/2,this.y,
-			this.x+this.w-this.w/2,this.y+this.w,
-			this.x-this.w/2,		this.y+this.w,
-			this.x+this.w/2-this.w/2,this.y,
+			this.x-this.w,this.y+this.w,					238.0/255.0,	253.0/255.0,	237.0/255.0,
+			this.x,		this.y+this.w,							238.0/255.0,	253.0/255.0,	237.0/255.0,
+			this.x-this.w/2,this.y,								238.0/255.0,	253.0/255.0,	237.0/255.0,
+			this.x+this.w-this.w/2,this.y+this.w,	238.0/255.0,	253.0/255.0,	237.0/255.0,
+			this.x-this.w/2,		this.y+this.w,		238.0/255.0,	253.0/255.0,	237.0/255.0,
+			this.x+this.w/2-this.w/2,this.y,			238.0/255.0,	253.0/255.0,	237.0/255.0,
 /* 
 			this.x-this.w/2,				this.y-this.w/2,
 			this.x-this.w/2,				this.y+this.w/2,

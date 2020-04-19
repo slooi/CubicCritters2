@@ -39,13 +39,6 @@ class Player{
 		this.render()
 	}
 	render(){
-		data.push(
-			this.x-this.w/2, 					this.y-this.w/2,
-			this.x-this.w/2, 					this.y+this.w/2,
-			this.x+this.w/2, 					this.y-this.w/2,
-			this.x-this.w/2, 					this.y+this.w/2,
-			this.x+this.w/2, 					this.y+this.w/2,
-			this.x+this.w/2, 					this.y-this.w/2,
-		)
+		square(this.x,this.y,this.w)
 	}
 }

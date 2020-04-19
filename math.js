@@ -85,9 +85,38 @@ function arrToVec(arr){
 	}
 }
 
+
+/* 
+RETURNS
+*/
+function mCopy(m){
+	mCopyTest(m)
+	const newM = new Array(m.length)
+	for(let i=0;i<m.length;i++){
+		newM[i] = new Array(m[0].length)
+		for(let j=0;j<m[0].length;j++){
+			newM[i][j] = m[i][j]
+		}
+	}
+	return newM
+}
+
 //#############
 // TESTS
 //#############
+
+/* 
+m.length < 1
+m[0].length < 0
+*/
+function mCopyTest(m){
+	if(m.length <1){
+		throw new Error('ERROR: m.length < 1')
+	}
+	if(m[0].length < 0){
+		throw new Error('ERROR: m[0].length < 0')
+	}
+}
 
 
 /* 
