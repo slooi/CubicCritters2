@@ -5,7 +5,7 @@ class Player{
 	constructor(inputs,x,y){
 		this.x = x
 		this.y = y
-		this.speed = 2	// NEED SPEED FOR QUAD!@#!@#!@#
+		this.speed = 10//2	// NEED SPEED FOR QUAD!@#!@#!@#
 		this.w = 16
 		this.inputs = inputs
 		this.xVel = 0

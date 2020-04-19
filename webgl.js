@@ -6,8 +6,8 @@ const fsSource = document.getElementById('fsSource').innerText
 
 // canvas
 const canvas = document.createElement('canvas')
-canvas.width = 	400//window.innerWidth	//300	*3//window.innerWidth	//300	*3
-canvas.height = 400//window.innerHeight//300	*3//window.innerHeight//300	*3
+canvas.width = 	window.innerWidth	//300	*3//window.innerWidth	//300	*3
+canvas.height = window.innerHeight//300	*3//window.innerHeight//300	*3
 document.body.append(canvas)
 
 // gl
@@ -198,7 +198,7 @@ function clearCanvas(){
 
 function render(){
 	gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW)
-	gl.drawArrays(gl.TRIANGLES,0,data.length/2)
+	gl.drawArrays(gl.TRIANGLES,0,data.length/5)
 }
 
 

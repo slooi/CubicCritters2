@@ -13,7 +13,7 @@ let data = []
 let grid
 const inputs = inputHandler()
 
-var debugMode = 1		// 0 - off, 1 - on
+var debugMode = 0		// 0 - off, 1 - on
 
 // Game variables
 let critterList = []
@@ -22,22 +22,24 @@ let deleteList = []
 let deleteListFood = []
 let player = new Player(inputs,hWidth,hHeight)
 let camera = new Camera(0,0,0.5,fWidth,fHeight)
-let maxPopulation = 1
+let maxPopulation = 500
 
 
 
 function screenSetting(){
+
+	// SPAWNING
 	if(debugMode === 0){
 		// default
-		for(let i=0;i<200;i++){// 35000, 3000
-			critterList[i] = new Critter(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,0,2)
+		for(let i=0;i<500;i++){// 35000, 3000
+			critterList[i] = new Critter(fWidth*Math.random()*5-fWidth*2,fWidth*Math.random()*5-fWidth*2,0,2)
 		}
-		for(let i=0;i<1000;i++){
-			foodList[i] = new Food(fWidth*Math.random()*3-fWidth,fHeight*Math.random()*3-fHeight,i)
+		for(let i=0;i<2000;i++){
+			foodList[i] = 			new Food(fWidth*Math.random()*5-fWidth*2,fWidth*Math.random()*5-fWidth*2,i)
 		}
 	}else{
 		// debugging
-		for(let i=0;i<5;i++){// 35000, 3000
+		for(let i=0;i<10;i++){// 35000, 3000
 			critterList[i] = new Critter(fWidth*Math.random(),fHeight*Math.random(),0,1)
 		}
 		for(let i=0;i<100;i++){
@@ -59,9 +61,10 @@ function setup(){
 
 function loop(){
 	// if(new Date()-oldDate>1000/fps){
-		data = []
+		
+		data.length = 0
 		if(debugMode === 0){
-			grid = new Quad(0-fWidth*3,0-fHeight*3,fWidth*7,fHeight*7,1)
+			grid = new Quad(0-fWidth*2,0-fWidth*2,fWidth*5,fWidth*5,1)
 		}else{
 			grid = new Quad(0,0,fWidth,fHeight,1)
 		}

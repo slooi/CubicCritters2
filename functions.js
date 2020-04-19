@@ -16,3 +16,4 @@ function getAddIndex(arr,value){
 	}
 	return low
 }
+function mod(a,n) {return a - Math.floor(a/n) * n}
