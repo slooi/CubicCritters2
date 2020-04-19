@@ -61,6 +61,13 @@ function setup(){
 
 function loop(){
 	// if(new Date()-oldDate>1000/fps){
+
+
+		if(debugMode === 0){
+			// if(Math.random()<.1){
+				foodList.push(new Food(fWidth*Math.random()*5-fWidth*2,fWidth*Math.random()*5-fWidth*2,foodList.length))
+			// }
+		}
 		
 		data.length = 0
 		if(debugMode === 0){
@@ -98,7 +105,6 @@ function loop(){
 		}
 		if(deleteListFood.length > 0){
 			for(let i=deleteListFood.length-1;i>-1;i--){	// IMPORTANT TO DO BACKWARDS
-				// console.log(deleteListFood[i])
 				foodList.splice(deleteListFood[i],1)
 			}
 			deleteListFood.length=0

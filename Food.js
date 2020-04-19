@@ -47,6 +47,9 @@ class Food{
 			const insertIdx = getAddIndex(deleteListFood,this.index)
 			deleteListFood.splice(insertIdx,0,this.index)		// Because we delete it LATER, multiple critters could eat this!@##!@#!@#
 			this.deleted = true
+			return true
+		}else{
+			return false
 		}
 	}
 }

@@ -128,9 +128,12 @@ class Critter{
 		for(let i=0;i<neighboursFood.length;i++){
 			const food = neighboursFood[i]
 			if(   (Math.pow(food.x-this.x,2)+Math.pow(food.y-this.y,2))   <Math.pow(this.w*0.6,2)){
-				neighboursFood[i].delete()
-				this.hp+=250
-				this.reproduce()
+				
+				if(neighboursFood[i].delete()){
+					// if not yet deleted
+					this.hp+=250
+					this.reproduce()
+				}
 			}else{
 				// once list is sorted, we know that preceeding food are too far to reach
 				break
