@@ -35,7 +35,7 @@ class Critter{
 		}else{
 			this.inputs = []
 			const numNeighbours = 4
-			const turnSpeed = Math.PI*0.2
+			const turnSpeed = Math.PI*0.05
 
 			grid.rangeQueryInit(150,numNeighbours,this)
 			let neighbours = grid.foundNeighbours
@@ -95,7 +95,7 @@ class Critter{
 				// dis
 				this.inputs.push(  Math.sqrt(  Math.pow(neighbourList[i].x-this.x,2)+Math.pow(neighbourList[i].y-this.y,2)  )/(1+canvas.width)		)	//TIED!@#!@#!@#
 				// angle
-				this.inputs.push( this.getAngle(this.dir,Math.atan2(this.y-neighbourList[i].y,this.x-neighbourList[i].x))  /Math.PI )//TIED!@#!@#!@#
+				this.inputs.push( Math.PI  / this.getAngle(this.dir,Math.atan2(neighbourList[i].y-this.y,neighbourList[i].x-this.x)))//TIED!@#!@#!@#
 				// console.log(this.getAngle(this.dir,Math.atan2(this.y-neighbourList[i].y,this.x-neighbourList[i].x))  /Math.PI)
 			}
 		}
